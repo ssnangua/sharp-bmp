@@ -63,19 +63,21 @@ function sharpFromBmp(input, options) {
 }
 
 async function sharpToBmp(image, fileOut) {
-  const buffer = await image.ensureAlpha().raw().toBuffer();
-  const metadata = await image.metadata();
+  const { data, info } = await image
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
   const bitmap = {
-    data: buffer,
-    width: metadata.width,
-    height: metadata.height,
+    data,
+    width: info.width,
+    height: info.height,
   };
   const rawData = encode(bitmap);
   try {
     fs.writeFileSync(fileOut, rawData.data);
     return {
-      width: metadata.width,
-      height: metadata.height,
+      width: info.width,
+      height: info.height,
       size: rawData.data.length,
     };
   } catch (err) {

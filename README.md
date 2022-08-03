@@ -63,18 +63,20 @@ sharp(bitmap.data, {
 ```js
 const fs = require("fs");
 const sharp = require("sharp");
-const BMP = require("sharp-bmp");
+const bmp = require("sharp-bmp");
 
 async function convert() {
   const image = sharp("input.jpg");
-  const buffer = await image.ensureAlpha().raw().toBuffer();
-  const metadata = await image.metadata();
+  const { data, info } = await image
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
   const bitmap = {
-    data: buffer,
-    width: metadata.width,
-    height: metadata.height,
+    data,
+    width: info.width,
+    height: info.height,
   };
-  const rawData = BMP.encode(bitmap);
+  const rawData = bmp.encode(bitmap);
   fs.writeFileSync("output.bmp", rawData.data);
 
   console.log(rawData.data.length); // size of output.bmp
