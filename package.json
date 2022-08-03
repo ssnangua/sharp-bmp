@@ -1,6 +1,6 @@
 {
   "name": "sharp-bmp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Bmp encoder and decoder for sharp base on bmp-js.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

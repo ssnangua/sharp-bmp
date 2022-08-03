@@ -1,4 +1,4 @@
-import { Sharp } from "sharp";
+import { Sharp, SharpOptions } from "sharp";
 
 export declare interface ImageData {
   data: Buffer;
@@ -25,7 +25,10 @@ export declare function encode(bitmap: ImageData): ImageData;
 /**
  * Create an instance of sharp from a BMP image
  */
-export declare function sharpFromBmp(input: string): Sharp;
+export declare function sharpFromBmp(
+  input: string,
+  options: SharpOptions
+): Sharp;
 
 /**
  * Write output image data to a BMP file
