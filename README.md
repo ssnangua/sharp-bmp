@@ -68,6 +68,9 @@ const bmp = require("sharp-bmp");
 async function convert() {
   const image = sharp("input.jpg");
   const { data, info } = await image
+    // If the image has alpha transparency channel
+    .flatten({ background: '#ffffff' })
+    // If the image has no alpha transparency channel
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });

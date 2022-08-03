@@ -64,6 +64,7 @@ function sharpFromBmp(input, options) {
 
 async function sharpToBmp(image, fileOut) {
   const { data, info } = await image
+    .flatten({ background: '#ffffff' })
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
