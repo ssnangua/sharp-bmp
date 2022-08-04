@@ -48,7 +48,7 @@ function encode(bitmap) {
   return bmp.encode(toAGBR(bitmap));
 }
 
-function sharpFromBmp(input, options) {
+function sharpFromBmp(input, options, resolveWithObject = false) {
   const buffer = typeof input === "string" ? fs.readFileSync(input) : input;
   const bitmap = decode(buffer);
   const image = sharp(bitmap.data, {
@@ -59,7 +59,7 @@ function sharpFromBmp(input, options) {
       channels: 4,
     },
   });
-  return image;
+  return resolveWithObject ? Object.assign(bitmap, { image }) : image;
 }
 
 async function sharpToBmp(image, fileOut) {

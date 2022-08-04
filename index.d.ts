@@ -1,34 +1,72 @@
 import { Sharp, SharpOptions } from "sharp";
 
+/**
+ * ABGR Buffer
+ */
+export declare type BmpBuffer = Buffer;
+
+/**
+ * RGBA Buffer
+ */
+export declare type SharpBuffer = Buffer;
+
 export declare interface ImageData {
-  data: Buffer;
-  height: number;
+  fileSize: number;
+  reserved: number;
+  offset: number;
+  headerSize: number;
   width: number;
+  height: number;
+  planes: number;
+  bitPP: number;
+  compress: number;
+  rawSize: number;
+  hr: number;
+  vr: number;
+  colors: number;
+  importantColors: number;
+  is_with_alpha: Boolean;
+  buffer: BmpBuffer;
+  data: SharpBuffer;
+  image?: Sharp;
+}
+
+export declare interface EncodeInput {
+  data: SharpBuffer;
+  width: number;
+  height: number;
+}
+
+export declare interface EncodeOutput {
+  data: BmpBuffer;
+  width: number;
+  height: number;
 }
 
 export declare interface OutputInfo {
-  height: number;
   width: number;
+  height: number;
   size: number;
 }
 
 /**
  * Decode BMP
  */
-export declare function decode(buffer: Buffer): ImageData;
+export declare function decode(buffer: BmpBuffer): ImageData;
 
 /**
  * Encode BMP
  */
-export declare function encode(bitmap: ImageData): ImageData;
+export declare function encode(bitmap: EncodeInput): EncodeOutput;
 
 /**
  * Create an instance of sharp from a BMP image
  */
 export declare function sharpFromBmp(
   input: string | Buffer,
-  options: SharpOptions
-): Sharp;
+  options?: SharpOptions,
+  resolveWithObject?: Boolean
+): Sharp | ImageData;
 
 /**
  * Write output image data to a BMP file

@@ -65,11 +65,11 @@ const fs = require("fs");
 const sharp = require("sharp");
 const bmp = require("sharp-bmp");
 
-async function convert() {
+(async () => {
   const image = sharp("input.jpg");
   const { data, info } = await image
     // If the image has alpha transparency channel
-    .flatten({ background: '#ffffff' })
+    .flatten({ background: "#ffffff" })
     // If the image has no alpha transparency channel
     .ensureAlpha()
     .raw()
@@ -83,8 +83,7 @@ async function convert() {
   fs.writeFileSync("output.bmp", rawData.data);
 
   console.log(rawData.data.length); // size of output.bmp
-}
-convert();
+})();
 ```
 
 ## Change Log
@@ -96,3 +95,8 @@ convert();
 ### 0.1.4
 
 - `sharpFromBmp(input, options)` support `Buffer` input.
+
+### 0.1.5
+
+- `sharpFromBmp(input, options, resolveWithObject)` add the third option, if `true`, will return an object with decoding info, default by `false`
+- Update index.d.ts
