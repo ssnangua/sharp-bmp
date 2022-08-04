@@ -49,7 +49,7 @@ function encode(bitmap) {
 }
 
 function sharpFromBmp(input, options) {
-  const buffer = fs.readFileSync(input);
+  const buffer = typeof input === "string" ? fs.readFileSync(input) : input;
   const bitmap = decode(buffer);
   const image = sharp(bitmap.data, {
     ...options,
@@ -64,7 +64,7 @@ function sharpFromBmp(input, options) {
 
 async function sharpToBmp(image, fileOut) {
   const { data, info } = await image
-    .flatten({ background: '#ffffff' })
+    .flatten({ background: "#ffffff" })
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });

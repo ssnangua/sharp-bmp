@@ -86,3 +86,13 @@ async function convert() {
 }
 convert();
 ```
+
+## Change Log
+
+### 0.1.3
+
+- Merge alpha transparency channel with a white background
+
+### 0.1.4
+
+- `sharpFromBmp(input, options)` support `Buffer` input.

@@ -26,7 +26,7 @@ export declare function encode(bitmap: ImageData): ImageData;
  * Create an instance of sharp from a BMP image
  */
 export declare function sharpFromBmp(
-  input: string,
+  input: string | Buffer,
   options: SharpOptions
 ): Sharp;
 
